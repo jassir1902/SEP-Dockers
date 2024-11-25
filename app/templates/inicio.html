@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Productos</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='inicio.css') }}">
+</head>
+<body>
+
+    <!-- Modal de Login -->
+    <div id="loginModal" style="display: block;">
+        <form id="loginForm">
+            <h2>Iniciar Sesión</h2>
+            <input type="text" id="username" placeholder="Nombre de usuario" required>
+            <input type="password" id="password" placeholder="Contraseña" required>
+            <button type="submit">Iniciar Sesión</button>
+        </form>
+        <p id="loginError" style="color: red; display: none;">Credenciales incorrectas</p>
+    </div>
+    
+    <!-- Contenedor de la aplicación -->
+    <div id="appContent" style="display: none;">
+
+        <div class="container">
+            <h1>Gestión de Productos</h1>
+            <div style="margin-bottom: 20px;">
+                <button id="addProductButton" onclick="openProductModal()">Agregar Producto</button>
+                <button id="editProductButton" onclick="openEditProductModal()">Editar Producto</button>
+                <button id="deleteProductButton" onclick="openDeleteProductModal()">Eliminar Producto</button>
+                <!-- Botón de Cerrar Sesión -->
+                <button id="logoutButton">Cerrar Sesión</button>
+    
+    
+            </div>
+            
+            <table id="productTable" border="1">
+                <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Nombre</th>
+                        <th>Descripción</th>
+                        <th>Cantidad</th>
+                        <th>Precio</th>
+                        <th>Categoría</th>
+                        <th>Imagen</th>
+                    </tr>
+                </thead>
+                <tbody id="productList">
+                    <!-- Productos cargados dinámicamente -->
+                </tbody>
+            </table>
+            <div id="pagination" style="text-align: center; margin-top: 20px;"></div>
+        </div>
+        <!-- Modal para agregar/editar producto -->
+        <div id="productModal" style="display: none;">
+            <form id="productForm">
+                <input type="hidden" id="productId">
+                <input type="text" id="name" placeholder="Nombre" required>
+                <input type="text" id="description" placeholder="Descripción" required>
+                <input type="number" id="quantity" placeholder="Cantidad" required>
+                <input type="number" id="price" placeholder="Precio" required>
+                <input type="text" id="category" placeholder="Categoría" required>
+                <input type="text" id="image" placeholder="URL de Imagen" required>
+                <button type="submit">Guardar</button>
+                <button type="button" id="closeModalButton">Cancelar</button>
+            </form>
+        </div>
+    
+        <!-- Modal para editar producto -->
+        <div id="editProductModal" style="display: none;">
+            <form id="editProductForm"> <!-- AÑADIDO EL ID CORRECTO -->
+                <input type="number" id="editProductCode" placeholder="Introduce el Código" required>
+                <button type="button" onclick="loadProductForEditing()">Cargar Producto</button> <!-- Nuevo botón -->
+                <input type="text" id="editName" placeholder="Producto" required>
+                <input type="text" id="editDescription" placeholder="Descripción" required>
+                <input type="number" id="editQuantity" placeholder="Stock" required>
+                <input type="number" id="editPrice" placeholder="Precio Unitario" required>
+                <input type="text" id="editCategory" placeholder="Categoría" required>
+                <input type="text" id="editImage" placeholder="Imagen URL" required>
+                <button type="submit">Guardar</button>
+                <button type="button" onclick="closeEditProductModal()">Cancelar</button>
+            </form>
+        </div>
+    
+        
+        
+        <!-- Modal para eliminar producto -->
+        <div id="deleteProductModal" style="display: none;">
+            <form id="deleteProductForm">
+                <label for="deleteProductCode">Código del Producto:</label>
+                <input type="number" id="deleteProductCode" placeholder="Introduce el código" required>
+                <button type="submit">Eliminar</button>
+                <button type="button" onclick="closeDeleteProductModal()">Cancelar</button>
+            </form>
+        </div>
+
+    </div>
+
+    <script src="/js/inicio.js"></script>
+</body>
+</html>
